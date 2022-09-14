@@ -1,17 +1,18 @@
 //=====================Importing Module and Packages=====================//
 const express = require('express');
 const router = express.Router();
-const createCollege = require("../Controller/collegeController")
+const { createCollege, getCollegeData } = require("../Controller/collegeController")
+const createIntern = require("../Controller/internController")
 
 
-
-
-
-//=====================Create Authors(Post API)=====================//
+//=====================Create College Data(Post API)=====================//
 router.post("/functionup/colleges", createCollege)
 
+//=====================Create Intern Data(Post API)=====================//
+router.post("/functionup/interns", createIntern)
 
-
+//=====================Create Intern Data(Post API)=====================//
+router.get("/functionup/collegeDetails", getCollegeData)
 
 
 //=====================Module Export=====================//
