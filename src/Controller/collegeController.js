@@ -1,3 +1,4 @@
+//=====================Importing Module and Packages=====================//
 const collegeModel = require("../Model/collegeModel")
 const internModel = require("../Model/internModel")
 const { valid, regForName, regForFullName, regForLink }= require("../Validation/validation")
@@ -37,13 +38,13 @@ const createCollege = async function (req, res) {
 
 const getCollegeData = async function (req, res) {
     try {
-        let data = req.query.collegeName
+        let collegeName = req.query.collegeName
 
-        if (!data) { return res.status(400).send({ status: false, msg: "College Name is Mandatory" }) }
+        if (!collegeName) { return res.status(400).send({ status: false, msg: "College Name is Mandatory" }) }
 
 
-        let getCollegeName = await collegeModel.findOne({ name: data }).select({ name: 1, fullName: 1, logoLink: 1 })
-        if (!getCollegeName) { return res.status(404).send({ status: false, msg: "College Data not Found." }) }
+        let getCollegeName = await collegeModel.findOne({ name: collegeName }).select({ name: 1, fullName: 1, logoLink: 1 })
+        if (!getCollegeName) { return res.status(404).send({ status: false, msg: `${collegeName} not Found.` }) }
 
         let getinternName = await internModel.find({ collegeId: getCollegeName["_id"] }).select({ name: 1, email: 1, mobile: 1 })
 
@@ -53,7 +54,7 @@ const getCollegeData = async function (req, res) {
         obj.logoLink = getCollegeName.logoLink
         
 
-        if (getinternName.length == 0) { return res.status(404).send({ data: obj, intern: "Intern is not at this college." }) }
+        if (getinternName.length == 0) { return res.status(404).send({ data: obj, intern: `Intern is not at this ${collegeName}.` }) }
         obj.intern = getinternName
 
         res.status(200).send({ status: true, data: obj })

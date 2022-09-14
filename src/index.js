@@ -30,7 +30,7 @@ app.use(
     }
 )
 
-//===================== Global Middleware for Route =====================//
+//===================== Global Middleware for All Route =====================//
 app.use('/', route)
 
 //===================== It will Handle error When You input Wrong Route =====================//

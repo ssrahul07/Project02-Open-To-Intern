@@ -1,3 +1,4 @@
+//=====================Importing Module and Packages=====================//
 const internModel = require("../Model/internModel")
 const collegeModel = require("../Model/collegeModel")
 const { valid, regForName, regForFullName, regForLink, regForEmail } = require("../Validation/validation")
@@ -18,7 +19,7 @@ const createIntern = async function (req, res) {
         if (!regForEmail(email)) return res.status(400).send({ status: false, msg: "Invalid Email." })
         let checkDuplicate = await internModel.findOne({ email: email })
         if (checkDuplicate) { return res.status(400).send({ status: false, msg: "Email Already Exist." }) }
-        
+
 
         if (!(valid(mobile))) return res.status(400).send({ status: false, msg: "Provide a valid Mobile Number." })
         if (!(/^([+]\d{2})?\d{10}$/).test(mobile)) return res.status(400).send({ status: false, msg: "Invalid Mobile Number." })
@@ -39,8 +40,6 @@ const createIntern = async function (req, res) {
         let internData = await internModel.create(data)
 
         res.status(201).send({ status: true, msg: "Intern Data Created", Data: internData })
-
-
 
     } catch (error) {
 
