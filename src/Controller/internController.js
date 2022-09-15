@@ -40,7 +40,7 @@ const createIntern = async function (req, res) {
 
         //===================== Fetching College Data from DB =====================//
         let getCollegeId = await collegeModel.findOne({ name: data.collegeName })
-        if (!getCollegeId) { return res.status(400).send({ status: false, msg: "Your Data is not Exist." }) }
+        if (!getCollegeId) { return res.status(400).send({ status: false, msg: `Your ${data.collegeName} is not Exist.` }) }
 
         //===================== Creating CollegeId inside Body with Key and Value =====================//
         data.collegeId = getCollegeId["_id"]
