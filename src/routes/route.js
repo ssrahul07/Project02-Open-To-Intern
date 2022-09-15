@@ -5,6 +5,7 @@ const { createCollege, getCollegeData } = require("../Controller/collegeControll
 const createIntern = require("../Controller/internController")
 
 
+
 //=====================Create College Data(Post API)=====================//
 router.post("/functionup/colleges", createCollege)
 
@@ -13,6 +14,8 @@ router.post("/functionup/interns", createIntern)
 
 //=====================Create Intern Data(Post API)=====================//
 router.get("/functionup/collegeDetails", getCollegeData)
+
+
 
 
 //=====================Module Export=====================//
