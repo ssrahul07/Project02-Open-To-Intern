@@ -1,13 +1,13 @@
 {
-  "name": "Open to Intern Project Requirement",
+  "name": "open_to_intern_project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Open to Intern Project(Project-02)(Group-21)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/index.js"
   },
-  "author": "",
+  "author": "RAJESH KUMAR SAHOO, ABHISHEK TIWARI, Y GURU BHASKAR, RAHUL KUMAR",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
