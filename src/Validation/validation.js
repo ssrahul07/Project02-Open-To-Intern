@@ -8,7 +8,7 @@ const valid = function (value) {
 //===================== Checking the input value with Regex =====================//
 const regForName = function (value) { return (/^[A-Za-z]+$\b/).test(value) }
 
-const regForFullName = function (value) { return (/^[a-zA-Z]{1,}(?: [a-zA-Z]+){0,}$/gm).test(value) }
+const regForFullName = function (value) { return (/^[A-Z][a-z]{1,}(?: [A-Z][a-z]+){0,}$/gm).test(value) }
 
 const regForLink = function (value) {
     return (/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi).test(value)
