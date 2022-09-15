@@ -1,7 +1,7 @@
 //=====================Importing Module and Packages=====================//
 const internModel = require("../Model/internModel")
 const collegeModel = require("../Model/collegeModel")
-const { valid, regForName, regForEmail, regForMobileNo } = require("../Validation/validation")
+const { valid, regForName, regForFullName, regForEmail, regForMobileNo } = require("../Validation/validation")
 
 
 
@@ -19,7 +19,7 @@ const createIntern = async function (req, res) {
 
         //=====================Validation of Name=====================//
         if (!(valid(name))) return res.status(400).send({ status: false, msg: "Provide a valid Name." })
-        if (!regForName(name)) return res.status(400).send({ status: false, msg: "Invalid Name." })
+        if (!regForFullName(name)) return res.status(400).send({ status: false, msg: "Invalid Name or Each Word's First letter Should be in Uppercase." })
 
         //===================== Validation of Email and Checking Duplicate Value =====================//
         if (!(valid(email))) return res.status(400).send({ status: false, msg: "Provide a valid Email." })
@@ -40,7 +40,7 @@ const createIntern = async function (req, res) {
 
         //===================== Fetching College Data from DB =====================//
         let getCollegeId = await collegeModel.findOne({ name: data.collegeName })
-        if (!getCollegeId) { return res.status(400).send({ status: false, msg: "Your Data is not Exist." }) }
+        if (!getCollegeId) { return res.status(400).send({ status: false, msg: `Your ${data.collegeName} is not Exist.` }) }
 
         //===================== Creating CollegeId inside Body with Key and Value =====================//
         data.collegeId = getCollegeId["_id"]
@@ -48,7 +48,9 @@ const createIntern = async function (req, res) {
         //===================== Creating Intern Data in DB =====================//
         let internData = await internModel.create(data)
 
-        res.status(201).send({ status: true, msg: "Intern Data Created Sucessfully.", Data: internData })
+
+        let obj = { isDeleted: internData.isDeleted, name: internData.name, email: internData.email, mobile: internData.mobile, collegeId: internData.collegeId }
+        res.status(201).send({ status: true, msg: `${name}'s Intern Data Created Sucessfully.`, data: obj })
 
     } catch (error) {
 

@@ -21,25 +21,28 @@ const createCollege = async function (req, res) {
         if (!(valid(name))) return res.status(400).send({ status: false, msg: "Provide a valid Name" })
         if (!regForName(name)) return res.status(400).send({ status: false, msg: "Invalid Name" })
 
-        //=====================Validation of Full Name=====================//
-        if (!(valid(fullName))) return res.status(400).send({ status: false, msg: "Provide a valid fullName" })
-        if (!regForFullName(fullName)) return res.status(400).send({ status: false, msg: "Invalid fullName" })
-
-        //=====================Validation of Logo Link=====================//
-        if (!(valid(logoLink))) return res.status(400).send({ status: false, msg: "Provide a valid logoLink" })
-        if (!regForLink(logoLink)) return res.status(400).send({ status: false, msg: "Invalid Link" })
-        if (!regForExtension(logoLink)) return res.status(400).send({ status: false, msg: "Invalid Extension Format." })
-
         //===================== Converting the value to LowerCase =====================//
         data.name = name.toLowerCase()
 
         //===================== Checking the Duplicate Value for Unique =====================//
         let checkDuplicate = await collegeModel.findOne({ name: data.name })
-        if (checkDuplicate) { return res.status(400).send({ status: false, msg: "The College Name is already exist. Please provide another College Name." }) }
+        if (checkDuplicate) { return res.status(400).send({ status: false, msg: `The ${data.name} is already exist. Please provide another College Name.` }) }
+
+        //=====================Validation of Full Name=====================//
+        if (!(valid(fullName))) return res.status(400).send({ status: false, msg: "Provide a valid fullName" })
+        if (!regForFullName(fullName)) return res.status(400).send({ status: false, msg: "Invalid fullName or Each Word's First letter Should be in Uppercase." })
+
+        //=====================Validation of Logo Link=====================//
+        if (!(valid(logoLink))) return res.status(400).send({ status: false, msg: "Provide a valid logoLink" })
+        if (!regForLink(logoLink)) return res.status(400).send({ status: false, msg: "Invalid Link" })
+        if (!regForExtension(logoLink)) return res.status(400).send({ status: false, msg: "Invalid Extension Format in logoLink." })
+
 
         //===================== Creating College Data in DB =====================//
         let collegeData = await collegeModel.create(data)
-        res.status(201).send({ status: true, msg: "College Data Created Sucessfully.", Data: collegeData })
+
+        let obj = { name: collegeData.name, fullName: collegeData.fullName, logoLink: collegeData.logoLink, isDeleted: collegeData.isDeleted }
+        res.status(201).send({ status: true, msg: `${data.name} College Data Created Successfully.`, data: obj })
 
     } catch (error) {
 
@@ -58,7 +61,7 @@ const getCollegeData = async function (req, res) {
         if (!collegeName) { return res.status(400).send({ status: false, msg: "Please Enter your CollegeName" }) }
 
         //===================== Fetching College Data from DB =====================//
-        let getCollegeName = await collegeModel.findOne({ name: collegeName }).select({ name: 1, fullName: 1, logoLink: 1 })
+        let getCollegeName = await collegeModel.findOne({ name: collegeName.toLowerCase() }).select({ name: 1, fullName: 1, logoLink: 1 })
         if (!getCollegeName) { return res.status(404).send({ status: false, msg: `${collegeName} not Found.` }) }
 
         //===================== Fetching Intern Data from DB =====================//
@@ -71,7 +74,7 @@ const getCollegeData = async function (req, res) {
         obj.logoLink = getCollegeName.logoLink
 
         //===================== Checking Intern Data is present or not =====================//
-        if (getinternName.length == 0) { return res.status(404).send({ data: obj, intern: `Intern is not available at this ${collegeName}.` }) }
+        if (getinternName.length == 0) { return res.status(404).send({ data: obj, interns: `Intern is not available at this ${collegeName}.` }) }
 
         //===================== Creating a key inside Object and put the value =====================//
         obj.interns = getinternName
