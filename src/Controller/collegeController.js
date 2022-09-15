@@ -74,7 +74,7 @@ const getCollegeData = async function (req, res) {
         if (getinternName.length == 0) { return res.status(404).send({ data: obj, intern: `Intern is not available at this ${collegeName}.` }) }
 
         //===================== Creating a key inside Object and put the value =====================//
-        obj.intern = getinternName
+        obj.interns = getinternName
 
         res.status(200).send({ status: true, data: obj })
 
