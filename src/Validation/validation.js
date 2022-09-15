@@ -18,7 +18,7 @@ const regForExtension = function (value) { return (/^https?:\/\/.*\/.*\.(png|gif
 
 const regForEmail = function (value) { return (/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/).test(value) }
 
-const regForMobileNo = function (value) { return (/^((\+91)?|91)?[789][0-9]{9}/g).test(value) }
+const regForMobileNo = function (value) { return (/^((\+91)?|91)?[789][0-9]{9}$/g).test(value) }
 
 
 
