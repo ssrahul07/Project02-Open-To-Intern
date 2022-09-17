@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ## Open to Intern Project Requirement
 # Plutonium:
 
@@ -15,15 +15,13 @@
 
 - College Model
 
-```
 { name: { mandatory, unique, example iith}, fullName: {mandatory, example `Indian Institute of Technology, Hyderabad`}, logoLink: {mandatory}, isDeleted: {boolean, default: false} }
-```
 
 - Intern Model
 
-```
+
 { name: {mandatory}, email: {mandatory, valid email, unique}, mobile: {mandatory, valid mobile number, unique}, collegeId: {ObjectId, ref to college model, isDeleted: {boolean, default: false}}
-```
+
 
 ### POST /functionup/colleges
 
@@ -61,32 +59,32 @@ Refer below sample
 
 ### Successful Response structure:
 
-```yaml
+
 { status: true, data: {} }
-```
+
 
 ### Error Response structure
 
-```yaml
+
 { status: false, message: "" }
-```
+
 
 ## Collections samples
 
 #### College
 
-```yaml
+
 {
   "name": "iith",
   "fullName": "Indian Institute of Technology, Hyderabad",
   "logoLink": "https://functionup.s3.ap-south-1.amazonaws.com/colleges/iith.png",
   "isDeleted": false,
 }
-```
+
 
 #### Intern
 
-```yaml
+
 {
   "isDeleted": false,
   "name": "Jane Does",
@@ -94,13 +92,13 @@ Refer below sample
   "mobile": "90000900000",
   "collegeId": ObjectId("888771129c9ea621dc7f5e3b"),
 }
-```
+
 
 ## Response samples
 
 ### College details
 
-```yaml
+
 {
   "data":
     {
@@ -136,4 +134,4 @@ Refer below sample
         ],
     },
 }
-```
+
