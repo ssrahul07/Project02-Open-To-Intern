@@ -29,16 +29,19 @@ const createCollege = async function (req, res) {
         if (checkDuplicate) { return res.status(400).send({ status: false, msg: `The ${data.name} is already exist. Please provide another College Name.` }) }
 
         //=====================Validation of Full Name=====================//
+        
         if (!(valid(fullName))) return res.status(400).send({ status: false, msg: "Provide a valid fullName" })
         if (!regForFullName(fullName)) return res.status(400).send({ status: false, msg: "Invalid fullName or Each Word's First letter Should be in Uppercase." })
 
         //=====================Validation of Logo Link=====================//
+        
         if (!(valid(logoLink))) return res.status(400).send({ status: false, msg: "Provide a valid logoLink" })
         if (!regForLink(logoLink)) return res.status(400).send({ status: false, msg: "Invalid Link" })
         if (!regForExtension(logoLink)) return res.status(400).send({ status: false, msg: "Invalid Extension Format in logoLink." })
 
 
         //===================== Creating College Data in DB =====================//
+        
         let collegeData = await collegeModel.create(data)
 
         let obj = { name: collegeData.name, fullName: collegeData.fullName, logoLink: collegeData.logoLink, isDeleted: collegeData.isDeleted }
