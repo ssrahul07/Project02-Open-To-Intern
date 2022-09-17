@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 ## Open to Intern Project Requirement
+# Plutonium:
 
-### Key points
+## Open to Intern Project Requirement:
+
+### Key points:
 
 - Create a group database `groupXDatabase`. You can clean the db you previously used and resue that.
 - This time each group should have a _single git branch_. Coordinate amongst yourselves by ensuring every next person pulls the code last pushed by a team mate. You branch will be checked as part of the demo. Branch name should follow the naming convention `project/internshipGroupX`
 - Follow the naming conventions exactly as instructed. The backend code will be integrated with the front-end application which means any mismatch in the expected request body will lead to failure in successful integration.
 
-### Models
+### Models:
+
 
 - College Model
 
@@ -41,7 +46,7 @@
 - Returns the list of all interns who have applied for internship at this college.
 - The response structure should look like [this](#college-details)
 
-## Testing
+## Testing:
 
 - To test these apis create a new collection in Postman named Project 2 Internship
 - Each api should have a new request in this collection
@@ -54,7 +59,7 @@ Refer below sample
 
 ## Response
 
-### Successful Response structure
+### Successful Response structure:
 
 ```yaml
 { status: true, data: {} }
